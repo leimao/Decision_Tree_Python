@@ -14,6 +14,13 @@ The categorical feature will only be used once in the decision tree.
 It splits numerical feature to two branches.
 The numerical feature could be used multiple times in the decision tree.
 
+## Algorithm
+
+To find the best feature to split, we find the feature that has the maximum information gain (entropy reduction) after split in a greedy manner. 
+
+To determine the value to split numerical features, we implemented a O(nlgn) algrithm in the "Introduction to Data Mining" book referenced below.
+
+
 ## Dependencies
 
 Python 3.5
@@ -28,15 +35,16 @@ Pandas 0.22
 .
 ├── arrhythmia.data
 ├── decision_tree.py
+├── demo.png
+├── LICENSE.md
 ├── main.py
 ├── README.md
-├── utils.py
-└── demo.png
+└── utils.py
 ```
 
 ## Usage
 
-To build decision tree:
+In Python, to build decision tree using the package in a Scikit-Learn style:
 
 ```python
 from decision_tree import DecisionTree
@@ -50,7 +58,7 @@ test_predictions = model.predict(test = test_set)
 
 ## Demo
 
-To build a decision tree on [Arrhythmia](http://archive.ics.uci.edu/ml/datasets/Arrhythmia) dataset:
+To build decision tree on [Arrhythmia](http://archive.ics.uci.edu/ml/datasets/Arrhythmia) dataset, and do 3-fold cross validation:
 
 ```bash
 $ python main.py
@@ -95,6 +103,8 @@ Training Error: 0.000000
 Test Error: 0.365205
 Time Elapsed: 00:05:26
 ```
+
+The test error stop increasing as max depth increases because the tree built cannot reach the maximum depth designated due to that it ran out of the training data (The dataset only contains about 400 data points).
 
 
 ## Reference:
